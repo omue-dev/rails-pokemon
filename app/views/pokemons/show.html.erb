@@ -1,20 +1,26 @@
 <div class="container p-4 text-left">
   <div class="row">
-    <div class="col-md-6 mb-4">
+    <div class="col-md-6 p-4">
       <h4><%= link_to "< Pokedéx", root_path(), class: "text-warning text-decoration" %></h2>
-        <h5 class="text-white pt-4">You hear a rustle in the tall grass... A wild Pokémon appears!</h5>
+        <h6 class="text-white pt-4">You hear a rustle in the tall grass... A wild Pokémon appears!</h6>
         <div class="card w-100 mt-4 border-4 border-warning rounded-4 bg-dark">
-          <div class="d-flex justify-content-center mt-3">
+          <div class="d-flex justify-content-center">
               <%= cl_image_tag @pokemon.photo.key, class: "img-fluid object-fit-contain", style: "height: 300px; width: auto;" %>
             </div>
-          <div class="card-body text-white text-center">
+          <div class="card-body text-white text-center pb-4">
             <h4 class="card-title"><%= @pokemon.name %></h5>
             <p class="card-text"><%= @pokemon.element_type %></p>
           </div>
         </div>
     </div>
-    <div class="col-md-6 pt-4">
+    <div class="col-md-6 p-4">
       <h2 class="fw-bold mb-4 text-white pt-4">Do you dare to catch this Pokémon?</h2>
+        <%= simple_form_for([@pokemon, @pokeball]) do |f| %>
+          <%= f.association :trainer, placeholder: "Who's trying their luck?"%>
+          <%= f.input :location, placeholder: "Where are you!" %>
+          <%= f.input :caught_on %>
+          <%= f.button :submit, "catch", class: "btn btn-warning" %>
+        <% end %>
     </div>
   </div>
 </div>

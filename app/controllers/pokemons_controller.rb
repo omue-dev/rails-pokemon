@@ -6,6 +6,7 @@ class PokemonsController < ApplicationController
   end
 
   def show
+    @pokeball = Pokeball.new
   end
 
   private

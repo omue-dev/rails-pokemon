@@ -1,0 +1,106 @@
+/* --- BASE CARD SETUP --- */
+.card-body {
+  padding-bottom: 2rem; /* oder mehr */
+}
+
+.card-flip {
+  perspective: 1000px;
+  height: 100%;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+}
+
+.card-flip:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* --- CARD FRONT & BACK --- */
+.card-front,
+.card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  background-color: #111; /* dunkles Pokédex-Schwarz */
+  border: 3px solid #ffc107; /* gelber Rahmen */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* --- FIX: CARDS BLEIBEN GLEICH GROSS --- */
+.card,
+.card-front,
+.card-back,
+.card-inner {
+  height: 400px; /* <--- feste Höhe für alle Karten */
+  min-height: 400px;
+}
+
+/* --- BILDER ZENTRIEREN --- */
+.card-front img {
+  display: block;
+  margin: 0 auto;
+  max-height: 220px;
+  width: auto;
+}
+
+/* --- TEXT-STYLING --- */
+.card-body {
+  text-align: center;
+  color: white;
+}
+
+.card-title {
+  font-weight: bold;
+  color: white;
+}
+
+/* --- BACKGROUND FIX --- */
+
+
+/* --- GLOW (optional) --- */
+.pokemon-bg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  background: radial-gradient(circle at center, rgba(255, 215, 0, 0.1), rgba(255, 0, 0, 0.05) 60%);
+  animation: poke-glow 3s infinite alternate;
+}
+.pokemon-back-bg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #f1f1f1;
+  animation: poke-glow 3s infinite alternate;
+}
+
+
+@keyframes poke-glow {
+  from {
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+  }
+  to {
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+  }
+}

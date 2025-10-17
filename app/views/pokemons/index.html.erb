@@ -1,24 +1,40 @@
-<!-- app/views/pokemons/index.html.erb -->
-
 <div class="container p-4 text-left">
   <h1 class="fw-bold mb-4 text-white">
     <i class="fa-solid fa-caret"></i> Pokédex
   </h1>
-  <h5 class="p-4"><%= link_to "Trainers", trainers_path(), class: "text-warning text-decoration" %></h5>
+  <h5 class="p-4">
+    <%= link_to "Meet the Trainers >", trainers_path(), class: "btn btn-warning border-1 rounded-4 shadow-lg" %>
+  </h5>
+
   <div class="row row-cols-1 row-cols-md-4 g-4">
     <% @pokemons.each do |pokemon| %>
       <div class="col">
-        <%= link_to pokemon_path(pokemon), class: "text-decoration-none" do %>
-          <div class="card h-100 border-4 border-warning rounded-4 bg-dark">
-            <div class="d-flex justify-content-center mt-3">
-              <%= cl_image_tag pokemon.photo.key, class: "img-fluid object-fit-contain", style: "height: 300px; width: auto;" %>
+        <div class="card-flip">
+          <div class="card-inner">
+
+            <!-- FRONT -->
+            <div class="card-front card h-100 border-4 border-warning rounded-4 bg-dark text-center">
+              <div class="d-flex justify-content-center mt-3">
+                <%= cl_image_tag pokemon.photo.key, class: "img-fluid object-fit-contain", style: "height: 300px; width: auto;" %>
+              </div>
+              <div class="card-body text-white">
+                <h4 class="card-title"><%= pokemon.name %></h4>
+                <p class="card-text"><%= pokemon.element_type %></p>
+              </div>
             </div>
-            <div class="card-body text-white text-center">
-              <h4 class="card-title"><%= pokemon.name %></h5>
-              <p class="card-text"><%= pokemon.element_type %></p>
+
+            <!-- BACK -->
+            <div class="card-back card h-100 border-4 border-warning rounded-4 bg-dark text-center">
+              <div class="pokemon-back-bg d-flex justify-content-center align-items-center flex-column p-3">
+                <div class="d-flex justify-content-center">
+                  <%= cl_image_tag pokemon.photo.key, class: "img-fluid object-fit-contain", style: "height: 300px; width: auto;" %>
+                </div>
+                <%= link_to "catch #{pokemon.name}", pokemon_path(pokemon), class: "btn btn-warning" %>
+              </div>
             </div>
+
           </div>
-        <% end %>
+        </div>
       </div>
     <% end %>
   </div>
