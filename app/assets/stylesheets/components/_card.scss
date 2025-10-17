@@ -1,26 +1,31 @@
-/* --- BASE CARD SETUP --- */
+/* === BASE CARD SETUP === */
+/* Adds consistent bottom padding for spacing between card content and border */
 .card-body {
-  padding-bottom: 2rem; /* oder mehr */
+  padding-bottom: 2rem;
 }
 
+/* Enables 3D space for the card flip animation */
 .card-flip {
   perspective: 1000px;
   height: 100%;
 }
 
+/* The inner container that handles the flip rotation */
 .card-inner {
   position: relative;
   width: 100%;
   height: 100%;
   transition: transform 0.8s ease;
-  transform-style: preserve-3d;
+  transform-style: preserve-3d; /* Preserve 3D positioning for front/back sides */
 }
 
+/* Triggers the flip animation on hover */
 .card-flip:hover .card-inner {
   transform: rotateY(180deg);
 }
 
-/* --- CARD FRONT & BACK --- */
+/* === FRONT & BACK SIDES OF THE CARD === */
+/* Both faces are absolutely positioned and stacked on top of each other */
 .card-front,
 .card-back {
   position: absolute;
@@ -28,35 +33,39 @@
   left: 0;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden;
+  backface-visibility: hidden; /* Hides the mirrored back when flipping */
   border-radius: 1rem;
-  background-color: #111; /* dunkles Pokédex-Schwarz */
-  border: 3px solid #ffc107; /* gelber Rahmen */
+  background-color: #111; /* Dark Pokédex background color */
+  border: 3px solid #ffc107; /* Signature yellow border */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
+/* The visible front face of the card */
 .card-front {
   transform: rotateY(0deg);
   z-index: 2;
 }
 
+/* The hidden back face (revealed on flip) */
 .card-back {
   transform: rotateY(180deg);
   z-index: 1;
 }
 
-/* --- FIX: CARDS BLEIBEN GLEICH GROSS --- */
+/* === ENSURE UNIFORM CARD HEIGHT === */
+/* Locks front/back/inner containers to the same height for a consistent layout */
 .card,
 .card-front,
 .card-back,
 .card-inner {
-  height: 400px; /* <--- feste Höhe für alle Karten */
+  height: 400px;
   min-height: 400px;
 }
 
-/* --- BILDER ZENTRIEREN --- */
+/* === IMAGE ALIGNMENT === */
+/* Centers images horizontally and limits height for visual balance */
 .card-front img {
   display: block;
   margin: 0 auto;
@@ -64,7 +73,8 @@
   width: auto;
 }
 
-/* --- TEXT-STYLING --- */
+/* === TEXT STYLING === */
+/* Ensures clean, centered typography */
 .card-body {
   text-align: center;
   color: white;
@@ -75,18 +85,22 @@
   color: white;
 }
 
-/* --- BACKGROUND FIX --- */
-
-
-/* --- GLOW (optional) --- */
+/* === OPTIONAL GLOW EFFECT === */
+/* Adds a subtle glowing animation for that Pokédex energy feel */
 .pokemon-bg {
   position: relative;
   width: 100%;
   height: 100%;
   border-radius: 1rem;
-  background: radial-gradient(circle at center, rgba(255, 215, 0, 0.1), rgba(255, 0, 0, 0.05) 60%);
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 215, 0, 0.1),
+    rgba(255, 0, 0, 0.05) 60%
+  );
   animation: poke-glow 3s infinite alternate;
 }
+
+/* Alternate background style for the card back side */
 .pokemon-back-bg {
   position: relative;
   width: 100%;
@@ -95,7 +109,7 @@
   animation: poke-glow 3s infinite alternate;
 }
 
-
+/* Defines the glowing pulse animation */
 @keyframes poke-glow {
   from {
     box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
