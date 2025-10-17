@@ -1,0 +1,25 @@
+<!-- app/views/pokemons/index.html.erb -->
+
+<div class="container p-4 text-left">
+  <h4><%= link_to "< Pokedéx", root_path(), class: "text-warning text-decoration" %></h2>
+  <h1 class="fw-bold mb-4 text-white pt-4">
+    Let's Get Training
+  </h1>
+  <div class="row h-100 row-cols-1 row-cols-md-4 g-4">
+    <% @trainers.each do |trainer| %>
+      <div class="col">
+        <%= link_to trainer_path(trainer), class: "text-decoration-none" do %>
+          <div class="card h-100 border-4 border-warning rounded-4 bg-dark d-flex flex-column justify-content-between align-items-center">
+            <div class="d-flex justify-content-center mt-3">
+              <%= cl_image_tag trainer.photo.key, class: "img-fluid object-fit-contain", style: "height: 300px; width: auto;" %>
+            </div>
+            <div class="card-body text-white text-center">
+              <h4 class="card-title"><%= trainer.name %></h4>
+              <p class="card-text"><%= trainer.age %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
