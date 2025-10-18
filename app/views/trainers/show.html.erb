@@ -1,7 +1,9 @@
 <div class="container p-4 text-left">
-  <h4><%= link_to "< Trainers", trainers_path(), class: "btn btn-warning border-1 rounded-4 shadow-lg" %></h2>
+  <%= link_to "< Trainers", trainers_path(), class: "btn btn-warning border-1 rounded-4 shadow-lg" %>
   <div class="row">
-    <div class="col-md-6 mt-4">
+    <div class="col-md-6">
+
+      <!-- Trainer Card -->
         <div class="card w-100 mt-4 border-4 border-warning rounded-4 bg-dark">
           <div class="d-flex justify-content-center pt-4">
             <%= cl_image_tag @trainer.photo.key, class: "img-fluid object-fit-contain", style: "height: 250px; width: auto;" %>
@@ -11,25 +13,43 @@
             <p class="card-text"><%= @trainer.age %></p>
           </div>
         </div>
-        <h3 class="text-white pt-4"><%= @trainer.name %> is going to catch 'em all!</h3>
     </div>
-    <div class="col-md-6 pt-4">
+    <div class="col-md-6 mt-4">
+
+      <!-- Catch Pokémon Form -->
+      <div class="card p-4 mb-4 border-4 border-warning rounded-4 bg-dark">
+         <h5 class="fw-bold mb-4 text-warning"><%= @trainer.name %> catch a Pokémon:</h5>
+        <%= simple_form_for([@trainer, @pokeball]) do |f| %>
+          <%= f.association :pokemon, placeholder: "Choose Pokemon"%>
+          <%= f.input :location, placeholder: "Where are you!" %>
+          <%= f.input :caught_on %>
+          <%= f.button :submit, "catch", class: "btn btn-warning" %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Trainer's Pokémons -->
+    <div class="col-12">
       <h5 class="fw-bold mb-4 text-white pt-4 text-center"><%= @trainer.name %>'s Pokémons</h5>
-      <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="row row-cols-1 row-cols-md-4 g-4 align-items-start">
           <% @trainer.pokeballs.each do |pokeball| %>
             <div class="col">
-              <div class="card h-100 border-4 border-dark rounded-4 bg-light shadow-sm">
+              <div class="small-card border-4 border-dark rounded-4 bg-light shadow-sm">
                 <div class="d-flex justify-content-center mt-3">
-                  <%= cl_image_tag pokeball.pokemon.photo.key, width: 200, height: 300, class: "img-fluid" %>
+                  <%= cl_image_tag pokeball.pokemon.photo.key, class: "img-fluid object-fit-contain", style: "height: 200px; width: auto;" %>
                 </div>
                 <div class="card-body text-white text-center">
                   <p class="card-title text-black"><%= pokeball.pokemon.name %></p>
                   <p class="card-text text-black"><%= pokeball.caught_on %></p>
+                  <%= link_to "Release",
+            trainer_pokeball_path(@trainer, pokeball),
+            data: { turbo_method: :delete, turbo_confirm: "Sure?" },
+            class: "btn btn-danger border-1 rounded-4 shadow-lg" %>
                 </div>
               </div>
             </div>
           <% end %>
       </div>
-    </div>
   </div>
+
 </div>

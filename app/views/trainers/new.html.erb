@@ -1,0 +1,32 @@
+<div class="container p-4 text-left">
+  <h4><%= link_to "< Trainers", trainers_path(), class: "btn btn-warning border-1 rounded-4 shadow-lg" %></h4>
+  <div class="row">
+    <div class="col-md-6 mt-4">
+      <%= simple_form_for @trainer, local: true do |form| %>
+        <div class="card w-100 mt-4 border-4 border-warning rounded-4 bg-dark">
+          <div class="card-body text-white text-start pb-4">
+            <h4 class="card-title">Add Trainer</h4>
+            <div class="mb-3">
+              <%= form.label :name, class: "form-label text-start" %>
+              <%= form.text_field :name, class: "form-control", required: true %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :age, class: "form-label text-start" %>
+              <%= form.number_field :age, class: "form-control", required: true %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :photo, class: "form-label text-start" %>
+              <%= form.file_field :photo, class: "form-control", required: true %>
+            </div>
+            <%= form.submit "Create Trainer", class: "btn btn-warning border-1 rounded-4 shadow-lg" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-6 mt-4 rounded-4 border-4 border-warning">
+      <div class="d-flex justify-content-center pt-4">
+        <%= image_tag "trainer-hero-img-min.png", class: "img-fluid object-fit-contain" %>
+       </div>
+    </div>
+  </div>
+</div>

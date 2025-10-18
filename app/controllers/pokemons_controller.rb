@@ -2,7 +2,12 @@ class PokemonsController < ApplicationController
   before_action :set_pokemon, only: [:show]
 
   def index
-    @pokemons = Pokemon.all
+    if params[:query].present?
+      @pokemons = Pokemon.where("LOWER(name) LIKE ?", "%#{params[:query].downcase}%")
+    else
+      @pokemons = Pokemon.all
+      @random = Pokemon.all.sample
+    end
   end
 
   def show

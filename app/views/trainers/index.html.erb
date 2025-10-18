@@ -1,9 +1,10 @@
 <div class="container p-4 text-left trainers-page">
-  <h4><%= link_to "< Pokedéx", root_path(), class: "btn btn-warning border-1 rounded-4 shadow-lg" %></h2>
+  <h4><%= link_to "< Pokedéx", root_path(), class: "btn btn-warning border-1 rounded-4 shadow-lg" %></h4>
   <h1 class="fw-bold mb-4 text-white pt-4">
     Let's Get Training
   </h1>
-  <div class="row h-100 row-cols-1 row-cols-md-4 g-4">
+  <h4><%= link_to "Add Trainer", new_trainer_path(), class: "btn btn-light border-1 rounded-4 shadow-lg" %></h4>
+  <div class="row h-100 row-cols-1 row-cols-md-4 g-4 mt-4">
     <% @trainers.each do |trainer| %>
       <div class="col">
         <%= link_to trainer_path(trainer), class: "text-decoration-none" do %>

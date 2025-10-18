@@ -12,5 +12,10 @@ Rails.application.routes.draw do
   resources :pokemons, only: [:show] do
     resources :pokeballs, only: [:create]
   end
-  resources :trainers, only: [:index, :show]
+  resources :trainers, only: [:index, :show, :new, :create] do
+    resources :pokeballs, only: [:create, :destroy]
+  end
+
+  # post "trainers/:trainer_od/pokeballs", to: "pokeballs#create_from_trainer", as :trainer_pokeballs
+
 end

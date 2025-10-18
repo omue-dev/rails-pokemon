@@ -11,6 +11,33 @@
   </head>
 
   <body>
+    <div class="flash-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+      <% if notice %>
+        <div class="alert alert-success alert-dismissible fade show shadow-lg" role="alert">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="alert alert-danger alert-dismissible fade show shadow-lg" role="alert">
+          <%= alert %>
+        </div>
+      <% end %>
+    </div>
     <%= yield %>
+    <script>
+      document.addEventListener("turbo:load", () => {
+        document.querySelectorAll(".alert").forEach((alert) => {
+          setTimeout(() => {
+            alert.classList.remove("show");
+            alert.style.opacity = "0";
+          }, 3000);
+
+          setTimeout(() => {
+            alert.remove();
+          }, 4000);
+        });
+      });
+    </script>
   </body>
 </html>
